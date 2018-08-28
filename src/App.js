@@ -3,9 +3,30 @@ import Snowman from './images/Snowman.jpg';
 
 import './App.css';
 
-import GameLogic from './Components/GameLogic.js' 
+import LetterButton from './Components/LetterButton'
+
+
+const Alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      pickedLetters: []
+    }
+  }
+
+  addLetterToPickedArray = (letter) => {
+    const newPickedLetters = this.state.pickedLetters.slice()
+    newPickedLetters.push(letter)
+    this.setState({
+      pickedLetters: newPickedLetters
+    })
+  }
+
+
+
   render() {
     return (
       <div className="App">
@@ -14,7 +35,17 @@ class App extends Component {
           <h1 className="App-title">Ultimate Snowman</h1>
         </header>
         <div>
-          <GameLogic />
+          {Alphabet.map((letter, i) => {
+            return <LetterButton
+            Key={i}
+            letter={letter}
+            picked={this.state.pickedLetters}
+            addLetterHandler={this.addLetterToPickedArray} />
+          })}
+          <p>Letters Picked:</p>
+          {this.state.pickedLetters.map((letter, i) => {
+            return <p key={i}>{letter}</p>
+          })}
         </div>
 
       </div>
