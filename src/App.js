@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Snowman from './images/Snowman.jpg';
 
 import './App.css';
+import Words from './Data/Words.json'
 
 import LetterButton from './Components/LetterButton'
 
@@ -15,6 +16,10 @@ class App extends Component {
     this.state = {
       pickedLetters: []
     }
+  }
+
+  componentDidMount() {
+    console.log(Words[2])
   }
 
   addLetterToPickedArray = (letter) => {
