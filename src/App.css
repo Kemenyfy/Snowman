@@ -27,11 +27,23 @@
   to { transform: rotate(360deg); }
 }
 
+.secretWord {
+  margin-top: 1em;
+}
+
+.letterButtons {
+  margin: 1em;
+}
+
 .button {
   width: 3em;
   height: 3em;
   background-color: rgb(192, 240, 248);
   border: 1px solid rgb(192, 240, 248);
   border-radius: 4px;
+  margin: .2em;
+}
+
+.hiddenLetters {
   margin: .2em;
 }
