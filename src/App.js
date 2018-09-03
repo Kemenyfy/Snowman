@@ -18,7 +18,7 @@ class App extends Component {
       emptySpaces: [],
       secretWord: Words[Math.floor(Math.random() * Words.length)],
       pickedCorrectly: [],
-      endGame: 'Keep Guessing!',
+      endGame: 'Start Guessing!',
     }
   }
 
@@ -57,14 +57,25 @@ class App extends Component {
     if (correctlyPickedLetters.length === this.state.secretWord.length) {
       this.setState({
         endGame: 'You Win!'
+      }) else if (correctlyPickedLetters.length < this.state.secretWord.length) {
+        this.setState({
+          endGame: 'Keep Guessing!'
       })
     }
 
     this.setState({
       pickedLetters: newPickedLetters,
       emptySpaces: capitalFirstLetter,
-      pickedCorrectly: correctlyPickedLetters
+      pickedCorrectly: correctlyPickedLetters,
     })
+  }
+
+  playAgain = () => {
+    this.setState({
+      pickedCorrectly: [],
+      pickedLetters: [],
+      secretWord: Words[Math.floor(Math.random() * Words.length)]
+    }), this.componentDidMount()
   }
 
   render() {
@@ -95,13 +106,13 @@ class App extends Component {
         <div className="letterButtons">
           {Alphabet.map((letter, i) => {
             return <LetterButton
-              Key={i}
+              key={i}
               letter={letter}
               picked={this.state.pickedLetters}
               addLetterHandler={this.addLetterToPickedArray} />
           })}
         </div>
-
+        <button onClick={this.playAgain}>Play Again</button>
       </div>
     );
   }
