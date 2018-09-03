@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import Snowman from './images/Snowman.jpg';
+import React, { Component } from 'react'
 
-import './App.css';
+import './App.css'
 import Words from './Data/Words.json'
 
 import LetterButton from './Components/LetterButton'
+import SnowmanImages from './Components/SnowmanImages'
 
 
 const Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
@@ -18,6 +18,7 @@ class App extends Component {
       emptySpaces: [],
       secretWord: Words[Math.floor(Math.random() * Words.length)],
       pickedCorrectly: [],
+      count: 0,
       endGame: 'Keep Guessing!',
     }
   }
@@ -27,12 +28,12 @@ class App extends Component {
       if (l === ' ') {
         return ' '
       } else {
-      return '_'
+        return '_'
       }
     })
     this.setState({
       emptySpaces: newEmptySpaces
-    }) 
+    })
   }
 
   addLetterToPickedArray = (letter) => {
@@ -41,7 +42,7 @@ class App extends Component {
     const correctlyPickedLetters = this.state.pickedCorrectly
     const newEmptySpaces = this.state.secretWord.split("").map((l, i) => {
       if (newPickedLetters.includes(l.toUpperCase())) {
-        if (!correctlyPickedLetters.includes(l)){
+        if (!correctlyPickedLetters.includes(l)) {
           correctlyPickedLetters.push(l);
         }
         return l.toLowerCase();
@@ -62,8 +63,8 @@ class App extends Component {
 
     this.setState({
       pickedLetters: newPickedLetters,
-      emptySpaces: capitalFirstLetter, 
-      pickedCorrectly:correctlyPickedLetters
+      emptySpaces: capitalFirstLetter,
+      pickedCorrectly: correctlyPickedLetters
     })
   }
 
@@ -72,10 +73,15 @@ class App extends Component {
       <div className="App">
 
         <header className="App-header">
-          <img src={Snowman} className="App-logo" alt="logo" />
+          <img src={`./Images/Snowman.jpg`} className="App-logo" alt="logo" />
           <h1 className="App-title">Ultimate Snowman</h1>
           <h5>{this.state.endGame}</h5>
         </header>
+
+        <SnowmanImages
+          count={this.state.count}
+          picked={this.state.pickedLetters}
+        />
 
         <div className="secretWord">
           {this.state.emptySpaces.map((emptySpace, i) => {
