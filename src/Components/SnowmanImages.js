@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class SnowmanImages extends Component {
     render() {
-        let missedGuesses = this.props.picked.length - this.props.count
+        let missedGuesses = this.props.picked.length - this.props.corrects.length
         if (missedGuesses < 8) {
             return (
                 <div><img src={`./Images/step_${missedGuesses}.png`} alt={`Snowman Step ${missedGuesses}`} width="220"/>

@@ -18,7 +18,6 @@ class App extends Component {
       emptySpaces: [],
       secretWord: Words[Math.floor(Math.random() * Words.length)],
       pickedCorrectly: [],
-      count: 0,
       endGame: 'Keep Guessing!',
     }
   }
@@ -79,7 +78,7 @@ class App extends Component {
         </header>
 
         <SnowmanImages
-          count={this.state.count}
+          corrects={this.state.pickedCorrectly}
           picked={this.state.pickedLetters}
         />
 
