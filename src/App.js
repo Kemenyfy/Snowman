@@ -31,7 +31,13 @@ class App extends Component {
       }
     })
     this.setState({
-      emptySpaces: newEmptySpaces
+      emptySpaces: newEmptySpaces,
+    }, this.generateRandomSecretWord)
+  }
+
+  generateRandomSecretWord = () => {
+    this.setState({
+      secretWord: Words[Math.floor(Math.random() * Words.length)]
     })
   }
 
@@ -57,10 +63,15 @@ class App extends Component {
     if (correctlyPickedLetters.length === this.state.secretWord.length) {
       this.setState({
         endGame: 'You Win!'
-      }) else if (correctlyPickedLetters.length < this.state.secretWord.length) {
-        this.setState({
-          endGame: 'Keep Guessing!'
       })
+    } else if (this.state.pickedCorrectly.length <= this.state.secretWord.length) {
+      this.setState({
+        endGame: 'Keep Guessing!'
+      })
+    // } else if (this.state.pickedLetters.length - this.state.pickedCorrectly.length === 7) {
+    //   this.setState({
+    //     endGame: 'You Lose!'
+    //   })
     }
 
     this.setState({
