@@ -7,6 +7,11 @@
   height: 80px;
 }
 
+@keyframes App-logo-spin {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
 .App-header {
   background-color: white;
   height: 150px;
@@ -20,11 +25,6 @@
 
 .App-intro {
   font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 .secretWord {

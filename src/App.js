@@ -19,6 +19,7 @@ class App extends Component {
       secretWord: Words[Math.floor(Math.random() * Words.length)],
       pickedCorrectly: [],
       endGame: 'Start Guessing!',
+      hardDisableButtons:false
     }
   }
 
@@ -62,16 +63,18 @@ class App extends Component {
 
     if (correctlyPickedLetters.length === this.state.secretWord.length) {
       this.setState({
-        endGame: 'You Win!'
+        endGame: 'You Win!', 
+        hardDisableButtons:true
+      })
+    } else if (newPickedLetters.length - correctlyPickedLetters.length === 7) {
+      this.setState({
+        endGame: 'You Lose!', 
+        hardDisableButtons:true
       })
     } else if (this.state.pickedCorrectly.length <= this.state.secretWord.length) {
       this.setState({
         endGame: 'Keep Guessing!'
       })
-    // } else if (this.state.pickedLetters.length - this.state.pickedCorrectly.length === 7) {
-    //   this.setState({
-    //     endGame: 'You Lose!'
-    //   })
     }
 
     this.setState({
@@ -85,25 +88,23 @@ class App extends Component {
     this.setState({
       pickedCorrectly: [],
       pickedLetters: [],
-      secretWord: Words[Math.floor(Math.random() * Words.length)]
+      secretWord: Words[Math.floor(Math.random() * Words.length)],
+      endGame: 'Start Guessing!'
     }), this.componentDidMount()
   }
 
   render() {
     return (
       <div className="App">
-
         <header className="App-header">
           <img src={`./Images/Snowman.jpg`} className="App-logo" alt="logo" />
           <h1 className="App-title">Ultimate Snowman</h1>
           <h5>{this.state.endGame}</h5>
         </header>
-
         <SnowmanImages
           corrects={this.state.pickedCorrectly}
           picked={this.state.pickedLetters}
         />
-
         <div className="secretWord">
           {this.state.emptySpaces.map((emptySpace, i) => {
             return (
@@ -113,14 +114,15 @@ class App extends Component {
             );
           })}
         </div>
-
         <div className="letterButtons">
           {Alphabet.map((letter, i) => {
             return <LetterButton
               key={i}
               letter={letter}
               picked={this.state.pickedLetters}
-              addLetterHandler={this.addLetterToPickedArray} />
+              addLetterHandler={this.addLetterToPickedArray}
+              hardDisableButtons={this.state.hardDisableButtons}
+              />
           })}
         </div>
         <button onClick={this.playAgain}>Play Again</button>

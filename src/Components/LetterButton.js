@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 
 class LetterButton extends Component {
     render() {
-        if (this.props.picked.includes(this.props.letter)) {
+        if (this.props.hardDisableButtons) {
+            return <button className="button" disabled>
+                {this.props.letter}
+            </button>
+        }
+        else if (this.props.picked.includes(this.props.letter)) {
             return (
                 <button className="button" disabled>
                     *

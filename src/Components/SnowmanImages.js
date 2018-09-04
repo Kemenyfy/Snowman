@@ -15,9 +15,9 @@ class SnowmanImages extends Component {
                     <img src={`./Images/step_7.png`} alt="You Lose" width="220" />
                 </div>
             )
-            // this.setState({
-            //     endGame: 'You Lose!'
-            // })
+            this.setState({
+                endGame: 'You Lose!'
+            })
         }
     }
 }
